@@ -38,7 +38,10 @@
                 </span>
             </h4>
         </div>
-        <!--I wasn't sure if I was supposed to display the Book ID but I did anyways because I wanted to show that the primary key does automatically increase for each entry-->
+        <!--
+            I wasn't sure if I was supposed to display the Book ID but I did anyways because I wanted to show that the primary key does automatically increase for each entry
+            I normalized the Classification and Category data, but I added them back together when it is displayed because that is how it looks in the example table in the assignment description
+            -->
         <div class="card-text p-1">Publisher: @x.Publisher | Classification/Category: @x.Classification/@x.Category | ISBN: @x.ISBN | Book ID: @x.BookId</div>
     </div>
 }
