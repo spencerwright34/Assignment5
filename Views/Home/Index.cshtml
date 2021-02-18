@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Spencer Wright";
+}
+
+@model IQueryable<Project>
+
+<!--
+    Spencer Wright, Group 3-1
+    Assignment 5
+    Description: create an app that implements a database and displays the content of the database to the Index page
+-->
+
+<header>
+    <h1 class="bg-primary text-center text-uppercase" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Spencer's Online Bookstore</h1>
+</header>
+<br />
+
+<h4 class="font-italic" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Welcome to Spencer's online bookstore! Please browse through the available books:</h4>
+<br />
+
+
+<!--
+    For styling, I decided to make it look more like a list of books, rather than a table
+    I think the list is more natural to scroll through when looking to buy something
+    I didn't put "Title" or "Author" in front of the titles and author because I figured people would understand what the book title is and the author
+-->
+
+@foreach (var x in Model)
+{
+    <div class="card card-outline-primary m-1 p-1">
+        <div class="bg-faded p-1">
+            <h4>
+                @x.Title
+                <small>@x.AuthorFirstName @x.AuthorLastName</small>
+                <span class="badge badge-pill badge-primary" style="float:right">
+                    <small>@x.Price.ToString("c")</small>
+                    
+                </span>
+            </h4>
+        </div>
+        <!--I wasn't sure if I was supposed to display the Book ID but I did anyways because I wanted to show that the primary key does automatically increase for each entry-->
+        <div class="card-text p-1">Publisher: @x.Publisher | Classification/Category: @x.Classification/@x.Category | ISBN: @x.ISBN | Book ID: @x.BookId</div>
+    </div>
+}
