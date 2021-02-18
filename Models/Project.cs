@@ -10,6 +10,8 @@ namespace Assignment5.Models
     {
         //Model for all the fields in the database
         //Author first and last name as well as Classification and Category have been split up for normalization purposes
+        //Every field is required
+        //BookId is the primary key in the database and that is why it has "Key" in the data validation
         [Key, Required]
         public int BookId { get; set; }
         [Required]
