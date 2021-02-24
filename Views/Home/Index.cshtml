@@ -1,36 +1,24 @@
 ﻿@{
-    ViewData["Title"] = "Spencer Wright";
+    ViewData["Title"] = "Spencer Wright - Assignment 6";
 }
 
-@model IQueryable<Project>
+@model ProjectListViewModel
 
 <!--
     Spencer Wright, Group 3-1
-    Assignment 5
-    Description: create an app that implements a database and displays the content of the database to the Index page
+    Assignment 6
+    Description: Add pagination to the assignment that was created for assignment 5
 -->
 
-<header>
-    <h1 class="bg-primary text-center text-uppercase" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Spencer's Online Bookstore</h1>
-</header>
-<br />
-
-<h4 class="font-italic" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Welcome to Spencer's online bookstore! Please browse through the available books:</h4>
-<br />
-
-
-<!--
-    For styling, I decided to make it look more like a list of books, rather than a table
-    I think the list is more natural to scroll through when looking to buy something
-    I didn't put "Title" or "Author" in front of the titles and author because I figured people would understand what the book title is and the author
--->
-
-@foreach (var x in Model)
+@foreach (var x in Model.Projects)
 {
     <div class="card card-outline-primary m-1 p-1">
         <div class="bg-faded p-1">
-            <h4>
-                @x.Title
+            <!--Additional Bootstrap 2
+                I made the titles of the books all uppercase 
+                the title and author names have the primary class, making them a different color-->
+            <h4 class="text-primary"> 
+                <span class="text-uppercase">@x.Title </span>                 
                 <small>@x.AuthorFirstName @x.AuthorLastName</small>
                 <span class="badge badge-pill badge-primary" style="float:right">
                     <small>@x.Price.ToString("c")</small>
@@ -42,6 +30,15 @@
             I wasn't sure if I was supposed to display the Book ID but I did anyways because I wanted to show that the primary key does automatically increase for each entry
             I normalized the Classification and Category data, but I added them back together when it is displayed because that is how it looks in the example table in the assignment description
             -->
-        <div class="card-text p-1">Publisher: @x.Publisher | Classification/Category: @x.Classification/@x.Category | ISBN: @x.ISBN | Book ID: @x.BookId</div>
+        <div class="card-text p-1">Publisher: @x.Publisher | Classification/Category: @x.Classification/@x.Category | ISBN: @x.ISBN | Book ID: @x.BookId | Pages: @x.NumPages </div>
     </div>
 }
+
+
+<!--
+    Additional Bootsrap 1 - I added data-toggle, data-placement, and title to the div tag
+    Title will be displayed as a message when you hover over the page number for navigation
+-->
+<div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+     class="btn-group pull-right m-1" data-toggle="tooltip" data-placement="top" title="Click for a different page"></div>

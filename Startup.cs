@@ -59,9 +59,13 @@ namespace Assignment5
 
             app.UseEndpoints(endpoints =>
             {
+                //This changes the URL so that the user can type /P2 to access the second page and /P3 to access the third page and so on
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "pagination",
+                    "P{page}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapDefaultControllerRoute();
             });
 
             //SeedData is static so we don't have to call it again

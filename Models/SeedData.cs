@@ -35,7 +35,8 @@ namespace Assignment5.Models
                         ISBN = "978-0451419439",
                         Classification = "Fiction",
                         Category = "Classic",
-                        Price = 9.95
+                        Price = 9.95,
+                        NumPages = 1488
                     },
 
                     new Project
@@ -47,7 +48,8 @@ namespace Assignment5.Models
                         ISBN = "978-0743270755",
                         Classification = "Non-Fiction",
                         Category = "Biography",
-                        Price = 14.58
+                        Price = 14.58,
+                        NumPages = 944
                     },
 
                     new Project
@@ -59,7 +61,8 @@ namespace Assignment5.Models
                         ISBN = "978-0553384611",
                         Classification = "Non-Fiction",
                         Category = "Biography",
-                        Price = 21.54
+                        Price = 21.54,
+                        NumPages = 832
                     },
 
                     new Project
@@ -71,7 +74,8 @@ namespace Assignment5.Models
                         ISBN = "978-0812981254",
                         Classification = "Non-Fiction",
                         Category = "Biography",
-                        Price = 11.61
+                        Price = 11.61,
+                        NumPages = 864
                     },
 
                     new Project
@@ -83,7 +87,8 @@ namespace Assignment5.Models
                         ISBN = "978-0812974492",
                         Classification = "Non-Fiction",
                         Category = "Historical",
-                        Price = 13.33
+                        Price = 13.33,
+                        NumPages = 528
                     },
 
                     new Project
@@ -95,7 +100,8 @@ namespace Assignment5.Models
                         ISBN = "978-0804171281",
                         Classification = "Fiction",
                         Category = "Historical Fiction",
-                        Price = 15.95
+                        Price = 15.95,
+                        NumPages = 288
                     },
 
                     new Project
@@ -107,7 +113,8 @@ namespace Assignment5.Models
                         ISBN = "978-1455586691",
                         Classification = "Non-Fiction",
                         Category = "Self-Help",
-                        Price = 14.99
+                        Price = 14.99,
+                        NumPages = 304
                     },
 
                     new Project
@@ -119,7 +126,8 @@ namespace Assignment5.Models
                         ISBN = "978-1455523023",
                         Classification = "Non-Fiction",
                         Category = "Self-Help",
-                        Price = 21.66
+                        Price = 21.66,
+                        NumPages = 240
                     },
 
                     new Project
@@ -131,7 +139,8 @@ namespace Assignment5.Models
                         ISBN = "978-1591847984",
                         Classification = "Non-Fiction",
                         Category = "Business",
-                        Price = 29.16
+                        Price = 29.16,
+                        NumPages = 400
                     },
 
                     new Project
@@ -143,7 +152,48 @@ namespace Assignment5.Models
                         ISBN = "978-0553393613",
                         Classification = "Fiction",
                         Category = "Thrillers",
-                        Price = 15.03
+                        Price = 15.03,
+                        NumPages = 642
+                    },
+
+                    //3 new books that I added
+                    new Project
+                    {
+                        Title = "The Count of Monte Cristo",
+                        AuthorFirstName = "Alexandre",
+                        AuthorLastName = "Dumas",
+                        Publisher = "Signet Classics",
+                        ISBN = "978-0140449266",
+                        Classification = "Fiction",
+                        Category = "Historical Adventure",
+                        Price = 14.60,
+                        NumPages = 1312
+                    },
+
+                    new Project
+                    {
+                        Title = "Harry Potter and the Goblet of Fire",
+                        AuthorFirstName = "J.K.",
+                        AuthorLastName = "Rowling",
+                        Publisher = "Bloomsbury",
+                        ISBN = "978-0439139595",
+                        Classification = "Fiction",
+                        Category = "Fantasy",
+                        Price = 14.84,
+                        NumPages = 752
+                    },
+
+                    new Project 
+                    {
+                        Title = "Ender's Game",
+                        AuthorFirstName = "Orson Scott",
+                        AuthorLastName = "Card",
+                        Publisher = "Tor Books",
+                        ISBN = "978-0765394866",
+                        Classification = "Fiction",
+                        Category = "Fantasy",
+                        Price = 9.49,
+                        NumPages = 448
                     }
 
                     );
