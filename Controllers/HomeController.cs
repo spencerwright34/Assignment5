@@ -25,12 +25,14 @@ namespace Assignment5.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string category, int page = 1)
         {
             //This code tells the page which items from the database to display and how many
             return View(new ProjectListViewModel
                 {
                     Projects = _repository.Projects
+                        //linq is the database language being used to query
+                        .Where(p => category == null || p.Category == category)
                         .OrderBy(p => p.BookId)
                         .Skip((page - 1) * PageSize)
                         .Take(PageSize),
@@ -39,8 +41,13 @@ namespace Assignment5.Controllers
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalNumItems = _repository.Projects.Count()
-                    }
+                        //If category is null, all items will be counted
+                        //If a category is selected, the number of books in that specific category are counted
+                        TotalNumItems = category == null ? _repository.Projects.Count() :
+                            _repository.Projects.Where (x => x.Category == category).Count()
+                    },
+
+                    CurrentCategory = category
                 });
         }
 

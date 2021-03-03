@@ -59,12 +59,29 @@ namespace Assignment5
 
             app.UseEndpoints(endpoints =>
             {
-                //This changes the URL so that the user can type /P2 to access the second page and /P3 to access the third page and so on
-                endpoints.MapControllerRoute(
-                    "pagination",
-                    "P{page}",
+                //Endpoint for if the user types in a category and page number into the URL
+                endpoints.MapControllerRoute("catpage",
+                    "{category}/{page:int}",
                     new { Controller = "Home", action = "Index" });
 
+                //Endpoint for if the user types in page number into the URL
+                endpoints.MapControllerRoute("page",
+                    "{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                //Endpoint for if the user types in a category  into the URL
+                endpoints.MapControllerRoute("category",
+                    "{category}",
+                    new { Controller = "Home", action = "Index", page = 1 });
+
+                //I ADDED AN ENDPOINT AT LINE 68 THAT DEALS WITH JUST A PAGE NUMBER BEING ENTERED SO I HAVE COMMENTED THIS PART OF THE CODE OUT BECAUSE IT DOES BASICALLY THE SAME THING
+                //This changes the URL so that the user can type /P2 to access the second page and /P3 to access the third page and so on
+                //endpoints.MapControllerRoute(
+                //    "pagination",
+                //    "P{page}",
+                //    new { Controller = "Home", action = "Index" });
+
+                //This is the default endpoint if the user doesn't enter anything into the URL
                 endpoints.MapDefaultControllerRoute();
             });
 

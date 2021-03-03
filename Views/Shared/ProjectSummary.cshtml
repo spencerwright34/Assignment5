@@ -1,0 +1,19 @@
+﻿@model Project
+
+<div class="card card-outline-primary m-1 p-1">
+    <div class="bg-faded p-1">
+        <h4 class="text-primary">
+            <span class="text-uppercase">@Model.Title </span>
+            <small>@Model.AuthorFirstName @Model.AuthorLastName</small>
+            <span class="badge badge-pill badge-primary" style="float:right">
+                <small>@Model.Price.ToString("c")</small>
+
+            </span>
+        </h4>
+    </div>
+    <!--
+        I wasn't sure if I was supposed to display the Book ID but I did anyways because I wanted to show that the primary key does automatically increase for each entry
+        I normalized the Classification and Category data, but I added them back together when it is displayed because that is how it looks in the example table in the assignment description
+        -->
+    <div class="card-text p-1">Publisher: @Model.Publisher | Classification/Category: @Model.Classification/@Model.Category | ISBN: @Model.ISBN | Book ID: @Model.BookId | Pages: @Model.NumPages </div>
+</div>

@@ -1,44 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Spencer Wright - Assignment 6";
+    ViewData["Title"] = "Spencer Wright - Assignment 7";
 }
 
 @model ProjectListViewModel
 
 <!--
     Spencer Wright, Group 3-1
-    Assignment 6
-    Description: Add pagination to the assignment that was created for assignment 5
+    Assignment 7
+    Description: Add category filters to the assignment that was created for assignment 6
 -->
 
 @foreach (var x in Model.Projects)
 {
-    <div class="card card-outline-primary m-1 p-1">
-        <div class="bg-faded p-1">
-            <!--Additional Bootstrap 2
-                I made the titles of the books all uppercase 
-                the title and author names have the primary class, making them a different color-->
-            <h4 class="text-primary"> 
-                <span class="text-uppercase">@x.Title </span>                 
-                <small>@x.AuthorFirstName @x.AuthorLastName</small>
-                <span class="badge badge-pill badge-primary" style="float:right">
-                    <small>@x.Price.ToString("c")</small>
-                    
-                </span>
-            </h4>
-        </div>
-        <!--
-            I wasn't sure if I was supposed to display the Book ID but I did anyways because I wanted to show that the primary key does automatically increase for each entry
-            I normalized the Classification and Category data, but I added them back together when it is displayed because that is how it looks in the example table in the assignment description
-            -->
-        <div class="card-text p-1">Publisher: @x.Publisher | Classification/Category: @x.Classification/@x.Category | ISBN: @x.ISBN | Book ID: @x.BookId | Pages: @x.NumPages </div>
-    </div>
+    <partial name="ProjectSummary" model="x" />
 }
 
 
-<!--
-    Additional Bootsrap 1 - I added data-toggle, data-placement, and title to the div tag
-    Title will be displayed as a message when you hover over the page number for navigation
--->
 <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
-     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-     class="btn-group pull-right m-1" data-toggle="tooltip" data-placement="top" title="Click for a different page"></div>
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+     class="btn-group pull-right m-1" data-toggle="tooltip" data-placement="top" title="Click for a different page">
+</div>
