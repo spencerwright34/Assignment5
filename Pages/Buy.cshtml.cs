@@ -36,6 +36,7 @@ namespace Assignment5.Pages
         {
             Project project = repository.Projects.FirstOrDefault(p => p.BookId == bookId);
 
+            //I commented this out because once I did the cart summary functioned correctly
             //Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
 
             Cart.AddItem(project, 1);
@@ -49,7 +50,8 @@ namespace Assignment5.Pages
         {
             Project project = repository.Projects.FirstOrDefault(p => p.BookId == bookId);
 
-            Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+            //I commented this out because once I did the cart summary functioned correctly
+            //Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
 
             Cart.RemoveLine(Cart.Lines.First(cl => cl.Project.BookId == bookId).Project);
 
