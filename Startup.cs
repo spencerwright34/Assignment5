@@ -1,6 +1,7 @@
 using Assignment5.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,59 +31,74 @@ namespace Assignment5
             //Passes the configuration of the connection string made in appsettings.json to the sql server
             services.AddDbContext<BookstoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:OnlineBookstoreConnection"]);
+                options.UseSqlite(Configuration["ConnectionStrings:OnlineBookstoreConnection"]);
             });
 
             //Provides scoped version of database to user
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            //Adding the Razor pages services
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+            //Creating the Cart Service
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
+            //app.UseHttpsRedirection();
 
+            app.UseDeveloperExceptionPage();
+            app.UseStatusCodePages();
+            app.UseStaticFiles();
+            app.UseSession();
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 //Endpoint for if the user types in a category and page number into the URL
                 endpoints.MapControllerRoute("catpage",
-                    "{category}/{page:int}",
+                    "{category}/{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 //Endpoint for if the user types in page number into the URL
                 endpoints.MapControllerRoute("page",
-                    "{page:int}",
+                    "{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 //Endpoint for if the user types in a category  into the URL
                 endpoints.MapControllerRoute("category",
                     "{category}",
-                    new { Controller = "Home", action = "Index", page = 1 });
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
 
                 //I ADDED AN ENDPOINT AT LINE 68 THAT DEALS WITH JUST A PAGE NUMBER BEING ENTERED SO I HAVE COMMENTED THIS PART OF THE CODE OUT BECAUSE IT DOES BASICALLY THE SAME THING
                 //This changes the URL so that the user can type /P2 to access the second page and /P3 to access the third page and so on
                 //endpoints.MapControllerRoute(
                 //    "pagination",
-                //    "P{page}",
+                //    "P{pageNum}",
                 //    new { Controller = "Home", action = "Index" });
 
                 //This is the default endpoint if the user doesn't enter anything into the URL
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
 
             //SeedData is static so we don't have to call it again

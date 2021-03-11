@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<string>
-
 <!--
     The rubric says to highlight the selected category, not to specifically highlight "Home" when none are selected
     Home (this <a> tag) does not highlight since the rubric does not specify to do so
@@ -15,7 +14,7 @@
     <a class="btn btn-block @(category == ViewBag.SelectedCategory ? "btn-primary" : "btn-outline-secondary")"
        asp-action="Index" asp-controller="Home"
        asp-route-category="@category"
-       asp-route-page="1">
+       asp-route-pageNum="1">
         @category
     </a>
 }

@@ -25,7 +25,7 @@ namespace Assignment5.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(string category, int page = 1)
+        public IActionResult Index(string category, int pageNum = 1)
         {
             //This code tells the page which items from the database to display and how many
             return View(new ProjectListViewModel
@@ -34,12 +34,12 @@ namespace Assignment5.Controllers
                         //linq is the database language being used to query
                         .Where(p => category == null || p.Category == category)
                         .OrderBy(p => p.BookId)
-                        .Skip((page - 1) * PageSize)
+                        .Skip((pageNum - 1) * PageSize)
                         .Take(PageSize),
 
                     PagingInfo = new PagingInfo
                     {
-                        CurrentPage = page,
+                        CurrentPage = pageNum,
                         ItemsPerPage = PageSize,
                         //If category is null, all items will be counted
                         //If a category is selected, the number of books in that specific category are counted

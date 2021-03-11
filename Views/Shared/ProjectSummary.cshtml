@@ -16,4 +16,16 @@
         I normalized the Classification and Category data, but I added them back together when it is displayed because that is how it looks in the example table in the assignment description
         -->
     <div class="card-text p-1">Publisher: @Model.Publisher | Classification/Category: @Model.Classification/@Model.Category | ISBN: @Model.ISBN | Book ID: @Model.BookId | Pages: @Model.NumPages </div>
+
+    <form id="@Model.BookId" asp-page="/Buy" method="post">
+        <input type="hidden" asp-for="BookId"/>
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <span class="card-text p-1">
+            @Model.Title
+            <button type="submit" class="btn-success btn-sm pull-right" style="float:right">
+                Add to Cart
+            </button>
+        </span>
+    </form>
+
 </div>
